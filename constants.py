@@ -24,3 +24,5 @@ TEST_FLOW_FOLDER = os.path.join(DATA_FOLDER, 'test_flows')
 GMA_CONFIG_FILE = 'optical_flow_config_ckpt/gma_8x2_50k_kitti2015_288x960.py'
 GMA_CKPT_FILE = 'optical_flow_config_ckpt/gma_8x2_50k_kitti2015_288x960.pth'
 
+RESULTS_FOLDER = 'results'
+
