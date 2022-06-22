@@ -80,15 +80,15 @@ def save_model(model, epoch, train_loss, val_loss, run_folder, best_loss, save_a
         f.write('epoch: {}, val_loss_per_item: {}'.format(epoch, val_loss))
 
     if best_loss:
-        print('best loss of {} updated in epoch {}'.format(best_loss, epoch))
+        print(f"best loss of {best_loss} updated in epoch {epoch}")
         torch.save(model.state_dict(), os.path.join(run_folder, 'best_loss.pt'))
-        print('saved model for epoch {}'.format(epoch))
+        print(f"saved model for epoch {epoch}".format(epoch))
 
     if save_all_epochs:
         saved_models_folder = os.path.join(run_folder, 'saved_models')
         os.makedirs(saved_models_folder, exist_ok=True)
         torch.save(model.state_dict(), os.path.join(saved_models_folder, '{}.pt'.format(epoch)))
-        print('saved model and losses for epoch {}'.format(epoch))
+        print(f"saved model and losses for epoch {epoch}")
 
 
 def get_next_run_folder(params_folder):
@@ -103,7 +103,7 @@ def get_next_run_folder(params_folder):
 
 
 def loss_plot(train_losses, val_losses, run_folder):
-    print('saving loss plot\n')
+    print(f"saving loss plot")
     epoch_range = range(1, len(train_losses) + 1)
     plt.plot(epoch_range, train_losses, label='train')
     plt.plot(epoch_range, val_losses, label='val')
@@ -174,7 +174,6 @@ if __name__ == '__main__':
     val_losses = []
     for epoch in range(1, args.num_epochs + 1):
         try:
-            print('\ntraining and validation for epoch: {}'.format(epoch))
             train_loss = train(epoch, _DEVICE)
             val_loss = validate(epoch, _DEVICE)
             train_losses.append(train_loss)
