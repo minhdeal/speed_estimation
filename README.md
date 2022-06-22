@@ -25,7 +25,7 @@ cd [source_codes_path]
 ```
 
 # Data preparation
-Please run below command for data preparation. This command will download the Mars Challenge videos, convert the videos to frames and save them into train/val/test sets, convert the frames to optical flows and save them into train/val/test sets, and split labels into train/val sets.
+Please run below command for data preparation. This command will download the Mars Challenge videos, convert the videos to frames and save them into train/val/test sets, convert the train/val/test frames to optical flows and save them, and split labels into train/val sets.
 ```
 python src/prepare_data.py
 ```
