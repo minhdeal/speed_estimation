@@ -9,7 +9,7 @@ from model import SpeedCNN
 
 def prediction_results_plot(preds, labels, run_folder):
     print('saving prediction plot')
-    plot_file = os.path.join(run_folder,'val_predictions.png')
+    plot_file = os.path.join(run_folder,'val.png')
     frame_range = range(1, len(preds) + 1)
     plt.plot(frame_range, preds, label='predictions')
     plt.plot(frame_range, labels, label='labels')
@@ -32,14 +32,14 @@ def predict_and_evaluate(flow_folder, img_folder, run_folder, label_file=None):
     model_.eval()
 
     if label_file:
-        pred_file = os.path.join(run_folder, 'val_predictions.txt')
+        pred_file = os.path.join(run_folder, 'val.txt')
     else:
-        pred_file = os.path.join(run_folder, 'test_predictions.txt')
+        pred_file = os.path.join(run_folder, 'test.txt')
 
     print('generating predictions using flow_folder {}, img_folder {}, and run_folder {}'.format(flow_folder, img_folder, run_folder))
     preds = []
     flow_list = os.listdir(flow_folder)
-    flow_list.sort()
+    flow_list.sort(key = lambda x: int(x.split('.')[0]))
     count = 0
     for flow_name in flow_list:
         flow_path = os.path.join(flow_folder, flow_name)
@@ -65,7 +65,7 @@ def predict_and_evaluate(flow_folder, img_folder, run_folder, label_file=None):
 
     with open(pred_file, 'w') as f:
         for i in range(len(preds)):
-            f.write('file: {}, prediction: {}\n'.format(flow_list[i], preds[i]))
+            f.write('{}\n'.format(preds[i]))
 
     if label_file:
         labels = []
@@ -78,7 +78,7 @@ def predict_and_evaluate(flow_folder, img_folder, run_folder, label_file=None):
         mse = np.square(np.subtract(preds, labels)).mean()
         val_mse_file = os.path.join(run_folder, 'val_mse.txt')
         with open(val_mse_file, 'w') as f:
-            f.write(val_mse_file + '\n')
+            f.write('{}\n'.format(mse))
         print('mean square error {} saved at {}'.format(mse, val_mse_file))
 
         prediction_results_plot(preds, labels, run_folder)

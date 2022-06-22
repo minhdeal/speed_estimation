@@ -1,6 +1,6 @@
 import os
 
-DATA_FOLDER = '../data'
+DATA_FOLDER = 'data'
 
 TRAIN_VIDEO_DOWNLOAD_LINK = 'https://marschallenge.s3.ap-northeast-2.amazonaws.com/train.mp4'
 TEST_VIDEO_DOWNLOAD_LINK = 'https://marschallenge.s3.ap-northeast-2.amazonaws.com/test.mp4'

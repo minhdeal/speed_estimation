@@ -111,7 +111,7 @@ def loss_plot(train_losses, val_losses, run_folder):
     plt.ylabel('loss_per_item')
     plt.title('Train and validation loss per item (mse)')
     plt.legend()
-    plot_file = os.path.join(run_folder, 'loss_plot.png')
+    plot_file = os.path.join(run_folder, 'loss.png')
     plt.savefig(plot_file)
     plt.clf()
 
