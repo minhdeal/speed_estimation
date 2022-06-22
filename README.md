@@ -37,7 +37,7 @@ python pretrained_predict_and_evaluate.py
 ```
 
 # Training, evaluation, and testing
-The below command will automatically train model, generate predictions for val set and evaluate them, and generate predictions for test set. The results, which include checkpoint, speed predictions, and MSE results, can be found in the latest sub-folder in the 'results' folder.
+The below command will automatically train model, generate predictions for val set and evaluate them, and generate predictions for test set. The results, which include checkpoint, speed predictions, MSE results, and plots can be found in the latest sub-folder in the 'results' folder.
 ```
 python train_val_test.py
 ```
