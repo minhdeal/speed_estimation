@@ -153,13 +153,13 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    """download_videos()
+    download_videos()
     video_to_images(constants.VIDEO_FILE, constants.TRAIN_IMAGE_FOLDER, constants.VAL_IMAGE_FOLDER, 
             constants.LABEL_FILE, constants.TRAIN_LABEL_FILE, constants.VAL_LABEL_FILE, validation_ratio=args.validation_ratio)
-    video_to_images(constants.TEST_VIDEO_FILE, constants.TEST_IMAGE_FOLDER)"""
+    video_to_images(constants.TEST_VIDEO_FILE, constants.TEST_IMAGE_FOLDER)
 
     images_to_flows_multiproc(constants.TRAIN_IMAGE_FOLDER, constants.TRAIN_FLOW_FOLDER, torch.cuda.device_count(), False)
     images_to_flows_multiproc(constants.VAL_IMAGE_FOLDER, constants.VAL_FLOW_FOLDER, torch.cuda.device_count(), False)
     images_to_flows_multiproc(constants.TEST_IMAGE_FOLDER, constants.TEST_FLOW_FOLDER, torch.cuda.device_count(), False)
-    #split_labels(constants.LABEL_FILE, constants.TRAIN_LABEL_FILE, constants.VAL_LABEL_FILE, validation_ratio=args.validation_ratio)
+    split_labels(constants.LABEL_FILE, constants.TRAIN_LABEL_FILE, constants.VAL_LABEL_FILE, validation_ratio=args.validation_ratio)
 

@@ -15,11 +15,11 @@ from predict_and_evaluate import predict_and_evaluate
 # set seed for reproducibility
 seed = 42
 os.environ['PYTHONHASHSEED'] = str(seed)
-# Torch RNG
+# torch RNG
 torch.manual_seed(seed)
 torch.cuda.manual_seed(seed)
 torch.cuda.manual_seed_all(seed)
-# Python RNG
+# python RNG
 np.random.seed(seed)
 random.seed(seed)
 
@@ -107,7 +107,6 @@ def loss_plot(train_losses, val_losses, run_folder):
     epoch_range = range(1, len(train_losses) + 1)
     plt.plot(epoch_range, train_losses, label='train')
     plt.plot(epoch_range, val_losses, label='val')
-    plt.xticks(epoch_range)
     plt.xlabel('epoch')
     plt.ylabel('loss_per_item')
     plt.title('Train and validation loss per item (mse)')
@@ -128,7 +127,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "--num_epochs",
         type=int,
-        default=2,
+        default=200,
         help="Number of epochs to train",
     )
     parser.add_argument(
