@@ -1,7 +1,7 @@
 # Mars Challenge
 
 # Results summary
-Best validation MSE using 30% validation set:
+Best validation MSE using 30% validation set: 0.7339890647723
 
 Please check report.pdf file for summary of my experiment process.
 
