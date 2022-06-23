@@ -58,6 +58,8 @@ def predict_and_evaluate(flow_folder, img_folder, run_folder, label_file=None):
         combined_flow = torch.from_numpy(combined_flow)
 
         pred = model_(combined_flow).item()
+        if pred < 0.0:
+            pred = 0.0
         preds.append(pred)
         count += 1
         if count % 100 == 0:
