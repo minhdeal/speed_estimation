@@ -4,6 +4,7 @@ import numpy as np
 import random
 import argparse
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 from matplotlib import pyplot as plt
 
 import constants
@@ -27,6 +28,8 @@ def train(epoch, device):
     print(f"\nrunning train epoch: {epoch}", flush=True)
     model_.train()
     train_loss = 0
+    if args.progress_bar:
+        pbar = tqdm(total=train_length)
     for i, data in enumerate(train_dataloader):
         flow, label = data[0].to(device, dtype=torch.float), data[1].to(device, dtype=torch.float)
         pred = model_(flow)
@@ -37,6 +40,8 @@ def train(epoch, device):
         optimizer.zero_grad()
 
         train_loss += loss.item() * args.batch_size
+        if args.progress_bar:
+            pbar.update(args.batch_size)
 
     train_loss_per_item = train_loss / train_length
     print(f"train_loss_per_item: {train_loss_per_item}")
@@ -48,12 +53,16 @@ def validate(epoch, device):
     print(f"running validation epoch: {epoch}", flush=True)
     val_loss = 0
     model_.eval()
+    if args.progress_bar:
+        pbar = tqdm(total=val_length)
 
     with torch.no_grad():
         for i, data in enumerate(val_dataloader):
             flow, label = data[0].to(device, dtype=torch.float), data[1].to(device, dtype=torch.float)
             val_pred = model_(flow)
             val_loss += loss_fn(val_pred, label).item() * args.batch_size
+            if args.progress_bar:
+                pbar.update(args.batch_size)
 
     val_loss_per_item = val_loss / val_length
     print(f"val_loss_per_item: {val_loss_per_item}")
@@ -136,6 +145,12 @@ if __name__ == '__main__':
         type=float,
         default=1e-5,
         help="Learning rate",
+    )
+    parser.add_argument(
+        "--progress_bar",
+        type=bool,
+        default=False,
+        help="Whether to show progress bar during training / validation or not",
     )
     args = parser.parse_args()
 
